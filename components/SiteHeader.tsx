@@ -12,7 +12,7 @@ export default function SiteHeader() {
     <header className='border-b border-rule'>
       <div className='mx-auto flex max-w-page items-baseline justify-between px-6 py-8 sm:py-10'>
         <Link href='/' className='font-serif text-xl tracking-wide sm:text-2xl'>
-          你的名字
+          刘馨睿
         </Link>
         <nav>
           <ul className='flex gap-6 font-serif text-sm sm:gap-8 sm:text-base'>

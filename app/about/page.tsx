@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '关于',
-  description: '关于作者',
+  description: '关于刘馨睿(Xinrui Liu)',
 };
 
 export default function AboutPage() {
@@ -14,22 +14,23 @@ export default function AboutPage() {
       </header>
       <article className='prose prose-lg max-w-none'>
         <p>
-          你好，我是<strong>你的名字</strong>。这里是我整理写作的地方——
-          一些随笔、一些片段，关于我看见的、读过的、想过的事。
+          你好,我是<strong>刘馨睿</strong>(Xinrui Liu)。
+          目前在欧洲做 AI 行业的 GTM(Go-to-Market)。
         </p>
-        <p>
-          写作于我更像是一种整理的方式。把日常里飘忽的念头落到纸上，看清楚它们的形状，再让它们慢慢沉淀。
-          这个网站没有目的，也不追求频率，只想留一个安静的地方，让文字自己说话。
-        </p>
-        <p>
-          欢迎读，也欢迎写信给我。
-        </p>
+        <p>CUPL → 北大 → Northwestern。</p>
+        <p>这里收录我写下的随笔与片段——关于<em>思考</em>、<em>职场观察</em>与<em>个人成长</em>。不定期更新,欢迎慢慢读。</p>
+        <p>写作于我更像是一种整理的方式。把日常里飘忽的念头落到纸上,看清楚它们的形状,再让它们慢慢沉淀。</p>
         <hr />
         <h2>联系</h2>
         <ul>
-          <li>邮箱：<a href='mailto:hello@example.com'>hello@example.com</a></li>
-          <li>其他：暂无</li>
+          <li>
+            邮箱:<a href='mailto:liux30654@gmail.com'>liux30654@gmail.com</a>
+          </li>
+          <li>微信:L5986428794</li>
+          <li>即刻:Grace_Liu</li>
+          <li>小红书号:299300429</li>
         </ul>
+        <p className='!mt-12 text-center font-serif italic text-muted'>天高海阔,来去自由。</p>
       </article>
     </div>
   );

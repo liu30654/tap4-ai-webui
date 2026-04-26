@@ -20,10 +20,10 @@ const sans = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: '你的名字 — 写作',
-    template: '%s · 你的名字',
+    default: '刘馨睿 — 写作',
+    template: '%s · 刘馨睿',
   },
-  description: '一个记录写作的个人网站。',
+  description: '刘馨睿(Xinrui Liu)的个人写作。记录思考、职场观察、个人成长。',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
