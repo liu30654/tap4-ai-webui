@@ -5,6 +5,7 @@ import { getWebNavigationList } from '@/network/webNavigation';
 import { CircleChevronRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
+import { BASE_URL } from '@/lib/env';
 import Faq from '@/components/Faq';
 import WebNavCardList from '@/components/webNav/WebNavCardList';
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
+    metadataBase: new URL(BASE_URL),
     title: t('title'),
     description: t('description'),
     keywords: t('keywords'),
