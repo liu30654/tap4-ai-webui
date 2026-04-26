@@ -1,86 +1,48 @@
 import type { Config } from 'tailwindcss';
 
 const config = {
-  darkMode: ['class'],
-  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
-  prefix: '',
+  content: ['./components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}'],
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
-    },
     extend: {
       colors: {
-        'tap4-black': '#0F0E14',
-        'dark-bg': '#1E1B24',
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
+        paper: '#f7f3ec',
+        ink: '#1a1a1a',
+        muted: '#6b6258',
+        rule: '#d9d2c4',
+        accent: '#7a2e1f',
+      },
+      fontFamily: {
+        serif: ['var(--font-serif)', 'Georgia', '"Source Han Serif SC"', '"Noto Serif SC"', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
       },
       maxWidth: {
-        pc: '1322px',
+        prose: '38rem',
+        page: '64rem',
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': '#1a1a1a',
+            '--tw-prose-headings': '#1a1a1a',
+            '--tw-prose-lead': '#1a1a1a',
+            '--tw-prose-links': '#7a2e1f',
+            '--tw-prose-bold': '#1a1a1a',
+            '--tw-prose-quotes': '#3a342d',
+            '--tw-prose-quote-borders': '#d9d2c4',
+            '--tw-prose-bullets': '#a89e8e',
+            '--tw-prose-hr': '#d9d2c4',
+            fontFamily: 'var(--font-serif), Georgia, serif',
+            fontSize: '1.0625rem',
+            lineHeight: '1.85',
+            a: { textDecoration: 'underline', textUnderlineOffset: '3px' },
+            'h1, h2, h3, h4': { fontWeight: '500' },
+            blockquote: { fontStyle: 'italic', fontWeight: '400' },
+          },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-        'caret-blink': {
-          '0%,70%,100%': { opacity: '1' },
-          '20%,50%': { opacity: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'caret-blink': 'caret-blink 1.25s ease-out infinite',
-      },
+      }),
     },
   },
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography')],
 } satisfies Config;
 
 export default config;
