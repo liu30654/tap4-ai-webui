@@ -1,0 +1,52 @@
+<!-- pages/chat/chat.wxml — 阶段 1-4：对话 -->
+<view class="chat">
+
+  <scroll-view scroll-y class="thread" scroll-into-view="{{scrollAnchor}}" scroll-with-animation>
+    <block wx:for="{{messages}}" wx:key="id" wx:for-item="m">
+      <view id="msg-{{m.id}}" class="msg msg-{{m.role}}">
+        <!-- AI 用逐字浮现；用户消息直接显示 -->
+        <block wx:if="{{m.role === 'ai'}}">
+          <text wx:for="{{m.chars}}" wx:for-item="c" wx:key="*this"
+                class="char"
+                style="animation-delay: {{index * 30}}ms">{{c}}</text>
+        </block>
+        <block wx:else>
+          <text>{{m.text}}</text>
+        </block>
+      </view>
+    </block>
+
+    <view wx:if="{{thinking}}" class="thinking">
+      <text>……</text>
+    </view>
+
+    <view id="bottom" class="bottom-anchor"></view>
+  </scroll-view>
+
+  <!-- 底部输入：等 AI 说完才允许用户回话（PRD §3.2 阶段 1 关键约束） -->
+  <view class="composer {{canType ? 'on' : 'off'}}">
+    <textarea
+      class="composer-input"
+      value="{{draft}}"
+      bindinput="onInput"
+      placeholder="{{canType ? '慢慢回答……' : '等一下，先看看上面'}}"
+      placeholder-class="placeholder"
+      maxlength="800"
+      auto-height
+      disable-default-padding
+      disabled="{{!canType}}"
+      adjust-position="{{true}}"
+    />
+    <view class="composer-row">
+      <text class="hint-faint">{{stageHint}}</text>
+      <button
+        class="send-btn {{draft.length > 0 && canType ? 'on' : ''}}"
+        bindtap="onSend"
+        disabled="{{!canType || draft.length === 0 || sending}}"
+        loading="{{sending}}">
+        {{stage >= 4 ? '生成那封信' : '发送'}}
+      </button>
+    </view>
+  </view>
+
+</view>

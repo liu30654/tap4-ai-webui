@@ -17,6 +17,7 @@
     "npm": "please-use-pnpm"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "0.32.1",
     "clsx": "2.1.0",
     "gray-matter": "4.0.3",
     "lucide-react": "0.365.0",

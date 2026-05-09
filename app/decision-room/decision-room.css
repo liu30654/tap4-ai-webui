@@ -1,0 +1,431 @@
+/* 决策室 Web 预览版样式 — 与小程序视觉契约保持一致（PRD §6） */
+
+.dr-root {
+  --dr-bg: #faf7f2;
+  --dr-text: #3c3530;
+  --dr-accent: #6b8e9f;
+  --dr-wood: #d4b896;
+  --dr-link: #c97b5c;
+  --dr-paper: #fffdf8;
+
+  position: fixed;
+  inset: 0;
+  background: var(--dr-bg);
+  color: var(--dr-text);
+  font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif CJK SC', 'Songti SC',
+    'STSong', 'SimSun', serif;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* —— 进入页 —— */
+.dr-entry {
+  min-height: 100vh;
+  padding: 64px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.dr-scene {
+  width: 200px;
+  height: 160px;
+  position: relative;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: dr-fade 800ms ease 100ms forwards;
+}
+.dr-scene-window {
+  position: absolute;
+  top: 0;
+  left: 32px;
+  width: 136px;
+  height: 112px;
+  border: 1px solid var(--dr-text);
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #efe6d6 0%, #f6efe2 100%);
+}
+.dr-scene-window::before,
+.dr-scene-window::after {
+  content: '';
+  position: absolute;
+  background: var(--dr-text);
+}
+.dr-scene-window::before {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+}
+.dr-scene-window::after {
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+}
+.dr-scene-mountains {
+  position: absolute;
+  bottom: 0;
+  left: -4px;
+  width: 144px;
+  height: 44px;
+  background: var(--dr-accent);
+  opacity: 0.55;
+  clip-path: polygon(
+    0% 100%,
+    14% 50%,
+    26% 70%,
+    42% 30%,
+    60% 60%,
+    80% 25%,
+    100% 60%,
+    100% 100%
+  );
+}
+.dr-scene-mountains.near {
+  height: 32px;
+  opacity: 0.7;
+  background: var(--dr-text);
+  clip-path: polygon(0% 100%, 18% 60%, 36% 80%, 56% 50%, 78% 75%, 100% 55%, 100% 100%);
+}
+.dr-scene-sun {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--dr-wood);
+  opacity: 0.85;
+}
+.dr-scene-table {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  border-top: 1px solid var(--dr-text);
+}
+.dr-scene-cup {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 22px;
+  background: var(--dr-link);
+  border-radius: 0 0 12px 12px;
+}
+.dr-scene-cup::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 4px;
+  width: 8px;
+  height: 12px;
+  border: 2px solid var(--dr-link);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+}
+
+.dr-prompt {
+  font-size: 22px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.dr-char {
+  display: inline-block;
+  opacity: 0;
+  animation: dr-char-in 400ms ease forwards;
+}
+@keyframes dr-char-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes dr-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+.dr-input-wrap {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+.dr-input-wrap.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dr-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(60, 53, 48, 0.12);
+  border-radius: 4px;
+  font: inherit;
+  color: var(--dr-text);
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+.dr-textarea::placeholder {
+  color: rgba(60, 53, 48, 0.35);
+}
+.dr-textarea:focus {
+  border-color: var(--dr-accent);
+}
+.dr-hint {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(60, 53, 48, 0.4);
+  margin-top: 6px;
+}
+.dr-btn {
+  margin-top: 24px;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  color: rgba(60, 53, 48, 0.4);
+  border: 1px solid rgba(60, 53, 48, 0.2);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 15px;
+  cursor: not-allowed;
+  transition: all 400ms ease;
+}
+.dr-btn.on {
+  color: var(--dr-accent);
+  border-color: var(--dr-accent);
+  cursor: pointer;
+}
+.dr-btn.on:hover {
+  background: rgba(107, 142, 159, 0.06);
+}
+.dr-btn:disabled {
+  cursor: not-allowed;
+}
+.dr-meta {
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(60, 53, 48, 0.4);
+  text-align: center;
+}
+.dr-error {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--dr-link);
+  text-align: center;
+}
+
+/* —— 对话页 —— */
+.dr-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.dr-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 48px 24px 24px;
+}
+.dr-msg {
+  margin-bottom: 32px;
+  font-size: 16px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.dr-msg-ai {
+  color: var(--dr-text);
+  padding-right: 32px;
+}
+.dr-msg-user {
+  color: rgba(60, 53, 48, 0.7);
+  text-align: right;
+  padding-left: 48px;
+  font-style: italic;
+}
+.dr-thinking {
+  color: rgba(60, 53, 48, 0.4);
+  font-size: 16px;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  animation: dr-pulse 1.4s ease-in-out infinite;
+}
+@keyframes dr-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.dr-composer {
+  border-top: 1px solid rgba(60, 53, 48, 0.08);
+  background: var(--dr-bg);
+  padding: 16px 24px 24px;
+  transition: opacity 600ms ease;
+}
+.dr-composer.off {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.dr-composer-input {
+  width: 100%;
+  min-height: 44px;
+  max-height: 200px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--dr-text);
+  background: #ffffff;
+  border: 1px solid rgba(60, 53, 48, 0.1);
+  border-radius: 4px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+.dr-composer-input:focus {
+  border-color: var(--dr-accent);
+}
+.dr-composer-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dr-stage-hint {
+  font-size: 12px;
+  color: rgba(60, 53, 48, 0.35);
+}
+.dr-send-btn {
+  background: transparent;
+  color: rgba(60, 53, 48, 0.4);
+  border: 1px solid rgba(60, 53, 48, 0.2);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 18px;
+  cursor: not-allowed;
+  transition: all 300ms;
+}
+.dr-send-btn.on {
+  color: var(--dr-accent);
+  border-color: var(--dr-accent);
+  cursor: pointer;
+}
+.dr-send-btn.on:hover {
+  background: rgba(107, 142, 159, 0.06);
+}
+
+/* —— 信 —— */
+.dr-letter {
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.dr-paper {
+  width: 100%;
+  max-width: 560px;
+  background: var(--dr-paper);
+  box-shadow: 0 4px 24px rgba(60, 53, 48, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.dr-paper.open {
+  max-height: 4000px;
+}
+.dr-paper-inner {
+  padding: 48px 40px;
+}
+.dr-letter-body {
+  font-size: 17px;
+  line-height: 2;
+  letter-spacing: 0.5px;
+  color: var(--dr-text);
+}
+.dr-para {
+  margin-bottom: 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  opacity: 0;
+  animation: dr-para-in 1200ms ease forwards;
+}
+@keyframes dr-para-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dr-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+.dr-actions.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dr-act-btn {
+  background: transparent;
+  color: var(--dr-accent);
+  border: 1px solid var(--dr-accent);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+.dr-act-btn:hover {
+  background: rgba(107, 142, 159, 0.06);
+}
+.dr-restart {
+  margin-top: 40px;
+  font-size: 13px;
+  color: rgba(60, 53, 48, 0.4);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  opacity: 0;
+  transition: opacity 800ms ease 200ms;
+}
+.dr-restart.show {
+  opacity: 1;
+}
