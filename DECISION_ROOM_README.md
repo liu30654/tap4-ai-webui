@@ -14,12 +14,49 @@ miniprogram/   # 微信小程序前端（原生小程序，无需打包工具）
     letter/   # 阶段 5：信
   utils/api.js
 
-backend/       # 轻量后端
+backend/       # 轻量后端（小程序用）
   main.py            # FastAPI 路由
   system_prompt.py   # AI 角色 + 工具调度规则 + 信模板（产品的灵魂）
   requirements.txt
   .env.example
+
+app/decision-room/         # Web 预览版（Next.js 路由 /decision-room）
+  page.tsx
+  layout.tsx
+  DecisionRoomApp.tsx      # 三屏单文件状态机（entry → chat → letter）
+  decision-room.css
+
+app/api/decision-room/     # 同款逻辑的 Next.js API routes
+  start/route.ts
+  turn/route.ts
+  letter/route.ts
+
+lib/decision-room/         # system prompt + Anthropic SDK 封装
+  prompt.ts                # 与 backend/system_prompt.py 双向同步
+  anthropic.ts
 ```
+
+## 0. 快速预览（无需装微信开发者工具）
+
+部署到 Vercel 后访问 `<你的域名>/decision-room`，就能用网页跑完整流程。
+需要在 Vercel 项目的 Environment Variables 里加：
+
+| 变量 | 必填 | 说明 |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | ✅ | 从 https://console.anthropic.com 拿 |
+| `DECISION_ROOM_MODEL` | 选填 | 默认 `claude-sonnet-4-6`；想要更深就 `claude-opus-4-7` |
+
+本地预览：
+
+```bash
+pnpm install
+echo "ANTHROPIC_API_KEY=sk-ant-..." > .env.local
+pnpm dev
+# 访问 http://localhost:3000/decision-room
+```
+
+> 这个 Web 版只为方便预览体验。**v1.0 的正式发布平台仍然是微信小程序**（PRD §7.1），
+> 上线时关掉这条路由或者加访问控制即可。
 
 ## 1. 跑后端
 
