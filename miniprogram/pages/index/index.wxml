@@ -1,0 +1,55 @@
+<!-- pages/index/index.wxml — 阶段 0：进入 -->
+<view class="entry">
+
+  <!-- 安静的"远山+窗+茶"插画：用极简 SVG-like 的几何图形以避免外部依赖 -->
+  <view class="scene fade-in">
+    <view class="scene-window">
+      <view class="scene-mountains far"></view>
+      <view class="scene-mountains near"></view>
+      <view class="scene-sun"></view>
+    </view>
+    <view class="scene-table">
+      <view class="scene-cup">
+        <view class="scene-steam s1"></view>
+        <view class="scene-steam s2"></view>
+        <view class="scene-steam s3"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 打字机效果的提问 -->
+  <view class="prompt">
+    <text wx:for="{{promptChars}}" wx:key="index"
+          class="char"
+          style="animation-delay: {{index * 50}}ms">{{item}}</text>
+  </view>
+
+  <!-- 输入框：最后浮现 -->
+  <view class="input-wrap {{inputReady ? 'show' : ''}}">
+    <textarea
+      class="input"
+      value="{{situation}}"
+      bindinput="onInput"
+      placeholder="把你现在卡在哪里，写下来。可以是一两段话。"
+      placeholder-class="placeholder"
+      maxlength="600"
+      auto-height
+      disable-default-padding
+      adjust-position="{{true}}"
+    />
+    <view class="hint">
+      <text>{{situation.length}} / 600</text>
+    </view>
+    <button
+      class="enter-btn {{canEnter ? 'on' : ''}}"
+      bindtap="onEnter"
+      loading="{{loading}}"
+      disabled="{{!canEnter || loading}}">
+      进入决策室
+    </button>
+    <view class="meta">
+      <text>这是一个帮你想清楚的工具，不是给你答案的工具。</text>
+    </view>
+  </view>
+
+</view>
